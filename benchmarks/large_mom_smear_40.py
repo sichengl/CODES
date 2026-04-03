@@ -17,7 +17,7 @@ from pyquda_benchmark.meas.mom_smearing import *
 Ls = 32
 Lt = 96
 #number of cfgs to use
-n = 1
+n = 2
 start_cfg = 1008
 step = 12
 stop_cfg = start_cfg + n * step
@@ -32,7 +32,7 @@ dirac = core.getDirac(latt_info, -0.05138, 1e-12, 1000, 1.0, 1.04243, 1.04243, [
 G5 = gamma.gamma(15)
 GT5 = gamma.gamma(7)
 momentum_list = [[i, 0, 0] for i in range(-20,21)]
-t_src_list = list(range(0, Lt, 32))
+t_src_list = list(range(0, Lt, 48))
 x_src_list = list(range(0, Ls, 16))
 y_src_list = list(range(0, Ls, 16))
 z_src_list = list(range(0, Ls, 16))
@@ -123,7 +123,7 @@ for i_cfg, cfg in enumerate(measurement_list):
                     #CONTRACT
                     deviceSynchronize()
                     s = perf_counter()
-                    pion_45 = contract(
+                    pion_45[i_cfg,t_idx,x_idx,y_idx,z_idx] += contract(
                         "pwtzyx,wtzyxjiba,jk,wtzyxklba,li->pt",
                         momentum_phases,
                         propag1_sink_smeared.data.conj(),
