@@ -1,5 +1,4 @@
-#now src is mom-smeared, but sink is not
-#need to avaerage over src locations and configs
+#src&sink momentum smeared, calculate pion 2pt function
 import h5py
 import numpy as np
 import cupy as cp
