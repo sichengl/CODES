@@ -17,7 +17,7 @@ from pyquda_benchmark.meas.mom_smearing import *
 Ls = 32
 Lt = 96
 #number of cfgs to use
-n = 2
+n = 10
 start_cfg = 1008
 step = 12
 stop_cfg = start_cfg + n * step
@@ -174,7 +174,7 @@ if latt_info.mpi_rank == 0:
 
     mean_rsqr = mean_rsqr / count
 
-    with h5py.File(f"pion_large_mom_smear40_hyp_corrected_gamma45.h5", "w") as f:
+    with h5py.File(f"pion_large_mom_smear{smear_steps}_hyp_corrected_gamma45.h5", "w") as f:
         dset = f.create_dataset("pion_45", data=pion_45_np)
         dset.attrs["dim_spec"] = np.array(["measurement_list", "t_src_list","x_src_list","y_src_list","z_src_list","momentum_list", "time"], dtype=h5py.string_dtype())
         dset.attrs["measurements"] = measurement_list
@@ -186,7 +186,7 @@ if latt_info.mpi_rank == 0:
         dset.attrs["dim_time"] = np.arange(latt_info.Lt)
         dset.attrs["mean_rsqr"] = mean_rsqr
 
-    with h5py.File(f"pion_large_mom_smear40_hyp_corrected_gamma55.h5", "w") as f:
+    with h5py.File(f"pion_large_mom_smear{smear_steps}_hyp_corrected_gamma55.h5", "w") as f:
         dset = f.create_dataset("pion_55", data=pion_55_np)
         dset.attrs["dim_spec"] = np.array(["measurement_list", "t_src_list","x_src_list","y_src_list","z_src_list","momentum_list", "time"], dtype=h5py.string_dtype())
         dset.attrs["measurements"] = measurement_list
